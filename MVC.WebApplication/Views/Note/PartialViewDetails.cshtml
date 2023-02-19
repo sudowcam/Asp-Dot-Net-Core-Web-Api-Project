@@ -1,0 +1,71 @@
+﻿@model MVC.WebApplication.Models.NoteModel
+
+<div class="container">
+    <div class="form-horizontal">
+        <input type="hidden" asp-for="NoteId" />
+        <div class="form-group row mb-3">
+            <label asp-for="Title" class="qwe col-xl-3 col-md-3 col-sm-3 col-4 col-form-label Field"></label>
+            <div class="col-xl-9 col-md-9 col-sm-9 col-8">
+                <input type="text" class="form-control" asp-for="Title" required/>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Description" class="qwe col-xl-3 col-md-3 col-sm-3 col-4 col-form-label Field"></label>
+            <div class="col-xl-9 col-md-9 col-sm-9 col-8">
+                <textarea class="form-control" asp-for="Description" rows="6" style="resize:none;" required></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="DueDate" class="qwe col-xl-3 col-md-3 col-sm-3 col-4 col-form-label Field"></label>
+            <div class="col-xl-9 col-md-9 col-sm-9 col-8">
+                <div class='input-group date'>
+                    <input asp-for="DueDate" class="form-control" type="datetime-local" required/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                <span asp-validation-for="DueDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="OwnerName" class="qwe col-xl-3 col-md-3 col-sm-3 col-4 col-form-label Field"></label>
+            <div class="col-xl-9 col-md-9 col-sm-9 col-8">
+                <input type="text" class="form-control" asp-for="OwnerName" />
+                <select class="form-select" asp-for="OwnerId" asp-items="@Model.UserListIems" required></select>
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="StatusName" class="qwe col-xl-3 col-md-3 col-sm-3 col-4 col-form-label Field"></label>
+            <div class="col-xl-9 col-md-9 col-sm-9 col-8">
+                <input type="text" class="form-control" asp-for="StatusName" />
+                <select class="form-select" asp-for="StatusId" asp-items="@Model.StatusListItems" required></select>
+                <span asp-validation-for="StatusId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal - ModalDelete -->
+<div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="Title">Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to permanently delete this record?</p>
+            </div>
+            <div class="modal-footer">
+                <button asp-controller="Note" asp-action="Delete" asp-route-id="@Model.NoteId" class="btn btn-danger" type="submit" name="button" value="ButtonDelete" id="ModalDelete_ButtonDelete" title="Delete">
+                    <i class="bi bi-check-lg"></i>&nbsp;&nbsp;Yes&nbsp;&nbsp;
+                </button>
+                <button class="btn btn-primary" data-bs-dismiss="modal" type="button" name="" value="" id="ModalDelete_ButtonCancel" title="Cancel">
+                    <i class="bi bi-x-lg"></i>&nbsp;&nbsp;Cancel&nbsp;&nbsp;
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
